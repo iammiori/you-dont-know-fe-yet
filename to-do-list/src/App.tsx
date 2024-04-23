@@ -1,8 +1,8 @@
-import { useRef, useState } from "react";
-import "./App.css";
-import Editor from "./components/editor";
-import Header from "./components/header";
-import List from "./components/list";
+import { useRef, useState } from 'react';
+import './App.css';
+import Editor from './components/editor';
+import Header from './components/header';
+import List from './components/list';
 
 interface mockModel {
   id: number;
@@ -15,19 +15,19 @@ const mockData: mockModel[] = [
   {
     id: 0,
     isDone: false,
-    content: "react 공부하기",
+    content: 'react 공부하기',
     date: new Date(),
   },
   {
     id: 1,
     isDone: false,
-    content: "수영 가기",
+    content: '수영 가기',
     date: new Date(),
   },
   {
     id: 2,
     isDone: false,
-    content: "러닝",
+    content: '러닝',
     date: new Date(),
   },
 ];

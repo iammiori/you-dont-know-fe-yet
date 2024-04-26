@@ -1,11 +1,16 @@
+import TodoMdoel from '../model/todo.model';
 import './todo-item.css';
 
-export default function ToDoItem() {
+interface Props {
+  todo: TodoMdoel;
+}
+export default function ToDoItem({ todo }: Props) {
+  const { isDone, content, date } = todo;
   return (
     <div className="TodoItem">
-      <input type="checkbox" />
-      <div className="contents">To do.. </div>
-      <div className="date">Date</div>
+      <input type="checkbox" checked={isDone} readOnly />
+      <div className="contents">{content}</div>
+      <div className="date">{date.toLocaleDateString()}</div>
       <button>삭제</button>
     </div>
   );

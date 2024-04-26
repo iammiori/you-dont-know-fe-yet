@@ -3,15 +3,9 @@ import './App.css';
 import Editor from './components/editor';
 import Header from './components/header';
 import List from './components/list';
+import TodoMdoel from './model/todo.model';
 
-interface mockModel {
-  id: number;
-  isDone: boolean;
-  content: string;
-  date: Date;
-}
-
-const mockData: mockModel[] = [
+const mockData: TodoMdoel[] = [
   {
     id: 0,
     isDone: false,
@@ -33,11 +27,11 @@ const mockData: mockModel[] = [
 ];
 
 function App() {
-  const [todos, setTodos] = useState<mockModel[]>(mockData);
+  const [todos, setTodos] = useState<TodoMdoel[]>(mockData);
   const idRef = useRef<number>(3);
 
   const onCreate = (content: string) => {
-    const newTodo: mockModel = {
+    const newTodo: TodoMdoel = {
       id: idRef.current++,
       isDone: false,
       content,
@@ -51,7 +45,7 @@ function App() {
     <div className="App">
       <Header />
       <Editor onCreate={onCreate} />
-      <List />
+      <List todos={todos} />
     </div>
   );
 }

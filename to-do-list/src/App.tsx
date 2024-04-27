@@ -1,11 +1,11 @@
-import { useRef, useState } from 'react';
+import { useReducer, useRef } from 'react';
 import './App.css';
 import Editor from './components/editor';
 import Header from './components/header';
 import List from './components/list';
-import TodoMdoel from './model/todo.model';
+import TodoModel from './model/todo.model';
 
-const mockData: TodoMdoel[] = [
+const mockData: TodoModel[] = [
   {
     id: 0,
     isDone: false,
@@ -26,36 +26,58 @@ const mockData: TodoMdoel[] = [
   },
 ];
 
+type Action = 'CREATE' | 'UPDATE' | 'DELETE';
+
+const reducer = (
+  state: TodoModel[],
+  action: { type: Action; data?: TodoModel; targetId?: number }
+) => {
+  switch (action.type) {
+    case 'CREATE':
+      if (action.data) {
+        return [action.data, ...state];
+      }
+      return state;
+    case 'UPDATE':
+      return state.map((item) =>
+        item.id === action.targetId ? { ...item, isDone: !item.isDone } : item
+      );
+    case 'DELETE':
+      return state.filter((item) => item.id !== action.targetId);
+    default:
+      return state;
+  }
+};
+
 function App() {
-  const [todos, setTodos] = useState<TodoMdoel[]>(mockData);
-  const idRef = useRef<number>(3);
+  const [todos, dispatch] = useReducer(reducer, mockData);
+
+  const idRef = useRef<number>(mockData.length);
 
   const onCreate = (content: string) => {
-    const newTodo: TodoMdoel = {
-      id: idRef.current++,
-      isDone: false,
-      content,
-      date: new Date(),
-    };
-
-    setTodos([newTodo, ...todos]);
+    dispatch({
+      type: 'CREATE',
+      data: {
+        id: idRef.current++,
+        isDone: false,
+        content,
+        date: new Date(),
+      },
+    });
   };
 
   const onUpdate = (targetId: number) => {
-    setTodos(
-      todos.map((todo) =>
-        todo.id === targetId
-          ? {
-              ...todo,
-              isDone: !todo.isDone,
-            }
-          : todo
-      )
-    );
+    dispatch({
+      type: 'UPDATE',
+      targetId,
+    });
   };
 
   const onDelete = (targetId: number) => {
-    setTodos(todos.filter((todo) => todo.id !== targetId));
+    dispatch({
+      type: 'DELETE',
+      targetId,
+    });
   };
 
   return (

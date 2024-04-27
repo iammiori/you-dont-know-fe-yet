@@ -6,8 +6,9 @@ import ToDoItem from './todo-item';
 interface Props {
   todos: TodoMdoel[];
   onUpdate: (targetId: number) => void;
+  onDelete: (targetId: number) => void;
 }
-export default function List({ todos, onUpdate }: Props) {
+export default function List({ todos, onUpdate, onDelete }: Props) {
   const [search, setSearch] = useState<string>('');
 
   const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +35,12 @@ export default function List({ todos, onUpdate }: Props) {
       />
       <div className="todos_wrapper">
         {filteredTodos.map((todo) => (
-          <ToDoItem key={todo.id} todo={todo} onUpdate={onUpdate} />
+          <ToDoItem
+            key={todo.id}
+            todo={todo}
+            onUpdate={onUpdate}
+            onDelete={onDelete}
+          />
         ))}
       </div>
     </div>

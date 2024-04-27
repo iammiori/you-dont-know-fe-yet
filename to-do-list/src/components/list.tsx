@@ -1,10 +1,10 @@
 import { ChangeEvent, useMemo, useState } from 'react';
-import TodoMdoel from '../model/todo.model';
+import TodoModel from '../model/todo.model';
 import './list.css';
 import ToDoItem from './todo-item';
 
 interface Props {
-  todos: TodoMdoel[];
+  todos: TodoModel[];
   onUpdate: (targetId: number) => void;
   onDelete: (targetId: number) => void;
 }

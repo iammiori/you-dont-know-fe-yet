@@ -1,8 +1,8 @@
-import TodoMdoel from '../model/todo.model';
+import TodoModel from '../model/todo.model';
 import './todo-item.css';
 
 interface Props {
-  todo: TodoMdoel;
+  todo: TodoModel;
   onUpdate: (targetId: number) => void;
   onDelete: (targetId: number) => void;
 }

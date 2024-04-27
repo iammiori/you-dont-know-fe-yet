@@ -8,13 +8,16 @@ export default function Editor({ onCreate }: Props) {
   const [content, setContent] = useState<string>('');
   const contentRef = useRef<HTMLInputElement>(null);
 
-  const onChangeContent = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+  const onChangeContent = ({ target }: ChangeEvent<HTMLInputElement>) => {
+    const { value } = target;
     setContent(value);
   };
 
-  const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+  const onKeyDown = ({ key, nativeEvent }: KeyboardEvent<HTMLInputElement>) => {
+    if (nativeEvent.isComposing) {
+      return;
+    }
+    if (key === 'Enter') {
       onSubmit();
     }
   };

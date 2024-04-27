@@ -1,4 +1,4 @@
-export default interface TodoMdoel {
+export default interface TodoModel {
   id: number;
   isDone: boolean;
   content: string;

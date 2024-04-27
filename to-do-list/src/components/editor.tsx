@@ -14,7 +14,10 @@ export default function Editor({ onCreate }: Props) {
   };
 
   const onKeyDown = ({ key, nativeEvent }: KeyboardEvent<HTMLInputElement>) => {
-    if (key === 'Enter' && !nativeEvent.isComposing) {
+    if (nativeEvent.isComposing) {
+      return;
+    }
+    if (key === 'Enter') {
       onSubmit();
     }
   };

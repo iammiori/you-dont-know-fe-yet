@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import TodoModel from '../model/todo.model';
 import './todo-item.css';
 
@@ -6,7 +7,7 @@ interface Props {
   onUpdate: (targetId: number) => void;
   onDelete: (targetId: number) => void;
 }
-export default function ToDoItem({ todo, onUpdate, onDelete }: Props) {
+function ToDoItem({ todo, onUpdate, onDelete }: Props) {
   const { id, isDone, content, date } = todo;
 
   const onChangeCheckbox = () => {
@@ -26,3 +27,6 @@ export default function ToDoItem({ todo, onUpdate, onDelete }: Props) {
     </div>
   );
 }
+
+const MemoizedTodoItem = memo(ToDoItem);
+export default MemoizedTodoItem;

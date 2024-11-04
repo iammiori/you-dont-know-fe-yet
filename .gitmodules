@@ -1,0 +1,3 @@
+[submodule "test-example-shopping-mall"]
+	path = test-example-shopping-mall
+	url = git@github.com:practical-fe-testing/test-example-shopping-mall.git

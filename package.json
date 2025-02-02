@@ -1,0 +1,13 @@
+{
+  "name": "you-dont-know-fe-yet",
+  "version": "0.0.1",
+  "author": "miori",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "packageManager": "yarn@4.6.0",
+  "devDependencies": {
+    "typescript": "^5.7.3"
+  }
+}

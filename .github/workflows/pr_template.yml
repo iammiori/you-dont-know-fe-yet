@@ -1,0 +1,48 @@
+name: Auto-apply PR Template in monorepo
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  apply-template:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect changed packages
+        id: detect_changes
+        run: |
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.event.pull_request.base.ref }})
+          echo "Changed files: $CHANGED_FILES"
+
+          if echo "$CHANGED_FILES" | grep -q '^packages/daily-fe/'; then
+            echo "TEMPLATE=daily-fe_template.md" >> $GITHUB_ENV
+          else
+            echo "TEMPLATE=default.md" >> $GITHUB_ENV
+          fi
+
+      - name: Update PR Body
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const templatePath = path.join('.github', 'PULL_REQUEST_TEMPLATE', process.env.TEMPLATE);
+
+            if (!fs.existsSync(templatePath)) {
+              console.log(`Template not found: ${templatePath}`);
+              return;
+            }
+
+            const template = fs.readFileSync(templatePath, 'utf8');
+            github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              body: template
+            });

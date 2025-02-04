@@ -9,6 +9,7 @@ frontend 학습을 위한 monorepo project입니다.<br/>
 
 ```plaintext
 root/
+├── .github/
 ├── .vscode/
 ├── .yarn/                 # yarn berry 관련 파일들
 ├── node_modules

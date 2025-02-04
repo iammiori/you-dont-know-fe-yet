@@ -3,7 +3,7 @@
 > Frontend Study Monorepo
 
 frontend 학습을 위한 monorepo project입니다.<br/>
-`yarn berry Workspaes` 를 사용하여 여러 frontend project를 효율적으로 관리합니다.
+`yarn berry Workspaces` 를 사용하여 여러 frontend project를 효율적으로 관리합니다.
 
 ## Project 구조
 

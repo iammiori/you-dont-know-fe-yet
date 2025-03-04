@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
+    "allowJs": true, // ts가 아닌  js 로 입력해도 동작 됨
+    "noImplicitAny": false, // 암시적 any 타입 허용
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
-    "esModuleInterop": true,
+    "esModuleInterop": true, // CommonJS 모듈과 ES 모듈 간의 상호 운용성 활성화
     "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
@@ -22,5 +23,11 @@
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules"],
+  "ts-node": {
+    // ts-node 실행 시 설정
+    "compilerOptions": {
+      "module": "commonjs" // ts-node에서는 CommonJS 모듈 사용
+    }
+  }
 }

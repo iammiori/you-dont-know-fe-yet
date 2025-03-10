@@ -1,5 +1,6 @@
 'use client';
 
+import Todo from '@/components/todo';
 import { Plus, Search } from 'lucide-react';
 
 export default function UI() {
@@ -18,7 +19,7 @@ export default function UI() {
         </div>
       </div>
 
-      {/* <Todo /> */}
+      <Todo />
 
       <button className="flex items-center justify-center px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 transition duration-150 ease-in-out">
         <Plus className="h-5 w-5 mr-2" />
